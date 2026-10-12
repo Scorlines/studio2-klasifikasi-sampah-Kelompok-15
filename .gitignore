@@ -27,7 +27,9 @@ ENV/
 .DS_Store
 Thumbs.db
 
-# Output Evaluasi / Log Sementara
+# Output Evaluasi / Log Sementara & Bobot Eksperimen
+checkpoints/
 eval_*.json
 eval_result.json
 *.log
+
