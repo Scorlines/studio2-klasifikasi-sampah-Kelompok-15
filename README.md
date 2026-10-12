@@ -6,9 +6,9 @@ Deep Learning (IF25-40401) · Teknik Informatika ITERA · Semester Ganjil 2026/2
 
 | No | Nama Lengkap | NIM | Kontribusi utama |
 |----|--------------|-----|------------------|
-| 1  |              |     |                  |
-| 2  |              |     |                  |
-| 3  |              |     |                  |
+| 1  | Muhammad Fadhel             | 123140106    |                  |
+| 2  | Abel Fortino             | 123140111     |                  |
+| 3  | Gilang Surya Agung              | 123140187     |                  |
 
 ## Ringkasan Pendekatan
 
