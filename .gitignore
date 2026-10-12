@@ -1,0 +1,33 @@
+# Dataset & Split Validasi (Aturan: Dilarang mengunggah dataset ke repo publik)
+train/
+my_train/
+my_val/
+train_sources.csv
+*.jpg
+*.jpeg
+*.png
+*.webp
+
+# Python artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+
+# Virtual Environments
+venv/
+.venv/
+env/
+ENV/
+
+# IDE & OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Output Evaluasi / Log Sementara
+eval_*.json
+eval_result.json
+*.log
