@@ -22,6 +22,7 @@ import importlib.util
 import json
 import sys
 import time
+import unittest
 from pathlib import Path
 
 import torch
@@ -72,6 +73,39 @@ def metrics(y_true, y_pred, k=len(CLASSES)):
     acc = sum(cm[c][c] for c in range(k)) / max(1, len(y_true))
     return {"macro_f1": sum(f1s) / k, "accuracy": acc,
             "per_class_f1": dict(zip(CLASSES, f1s)), "confusion_matrix": cm}
+
+
+class MetricsTests(unittest.TestCase):
+    def test_calculates_accuracy_f1_and_confusion_matrix(self):
+        y_true = [0, 0, 1, 1, 2, 2, 3, 3, 4, 4]
+        y_pred = [0, 1, 1, 1, 2, 3, 3, 4, 4, 0]
+
+        result = metrics(y_true, y_pred)
+
+        self.assertAlmostEqual(result["accuracy"], 0.6)
+        self.assertAlmostEqual(result["macro_f1"], 89 / 150)
+        self.assertEqual(
+            result["confusion_matrix"],
+            [
+                [1, 1, 0, 0, 0],
+                [0, 2, 0, 0, 0],
+                [0, 0, 1, 1, 0],
+                [0, 0, 0, 1, 1],
+                [1, 0, 0, 0, 1],
+            ],
+        )
+        self.assertEqual(list(result["per_class_f1"]), CLASSES)
+        self.assertAlmostEqual(result["per_class_f1"]["botol_plastik"], 0.5)
+        self.assertAlmostEqual(result["per_class_f1"]["gelas_plastik"], 0.8)
+        self.assertAlmostEqual(result["per_class_f1"]["kertas_kardus"], 2 / 3)
+
+    def test_empty_inputs_return_zero_metrics(self):
+        result = metrics([], [])
+
+        self.assertEqual(result["accuracy"], 0.0)
+        self.assertEqual(result["macro_f1"], 0.0)
+        self.assertEqual(result["confusion_matrix"], [[0] * len(CLASSES) for _ in CLASSES])
+        self.assertEqual(list(result["per_class_f1"].values()), [0.0] * len(CLASSES))
 
 
 @torch.no_grad()
